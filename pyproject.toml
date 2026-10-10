@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "docketwise-mcp"
+version = "0.1.0"
+description = "An MCP server for the method-verified DocketWise API"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = { text = "MIT" }
+dependencies = [
+    "httpx>=0.28.1,<0.29",
+    "mcp>=2.3,<3",
+    "pydantic>=2.11,<3",
+]
+
+[project.scripts]
+docketwise-mcp-setup = "docketwise_mcp.setup:setup"
+docketwise-mcp-verify = "docketwise_mcp.setup:verify"
+docketwise-mcp = "docketwise_mcp.server:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.3",
+    "pytest-asyncio>=1.3.0",
+    "respx>=0.22,<0.23",
+    "ruff>=0.12,<0.13",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["docketwise_mcp"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
