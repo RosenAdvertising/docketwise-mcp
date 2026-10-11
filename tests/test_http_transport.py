@@ -149,7 +149,7 @@ def test_empty_transport_variable_starts_stdio(value, monkeypatch):
 
 def test_invalid_transport_exits_with_choices(monkeypatch):
     monkeypatch.setenv("DOCKETWISE_MCP_TRANSPORT", "bogus")
-    with pytest.raises(SystemExit, match="DOCKETWISE_MCP_TRANSPORT.*stdio.*streamable-http"):
+    with pytest.raises(SystemExit, match=r"DOCKETWISE_MCP_TRANSPORT.*stdio.*streamable-http"):
         server.main()
 
 
